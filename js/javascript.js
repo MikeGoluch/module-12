@@ -1,5 +1,7 @@
 var url = "https://restcountries.eu/rest/v1/name/";
-var countriesList = $("#countries");
+var flagurl = "http://img.geonames.org/flags/x/";
+var prefix = "https://cors-anywhere.herokuapp.com/";
+var countriesTableList = $("#countries-table-list");
 
 $("#search").click(searchCountries);
 
@@ -11,19 +13,42 @@ function searchCountries() {
     $.ajax({
         url: url + countryName,
         method: "GET",
-        success: showCountriesList
+        success: function(resp) {
+            showCountriesList(resp);
+        }
     });
 }
 
+
 function showCountriesList(resp) {
-    countriesList.empty();
+    countriesTableList.empty();
     resp.forEach(function(item) {
-        $("<li>").text(item.name).appendTo(countriesList);
-        $("<li>").text("Background Information: ").appendTo(countriesList);
-        $("<li>").text("Capital: " + item.capital).appendTo(countriesList);
-        $("<li>").text("Land area: " + item.area).appendTo(countriesList);
-        $("<li>").text("Population: " + item.population).appendTo(countriesList);
-        $("<li>").text("Language(s): " + item.languages).appendTo(countriesList);
-        $("<li>").text("Currency: " + item.currencies).appendTo(countriesList);
+        $("<tr>").addClass("test").appendTo(countriesTableList);
+        $("<th>").addClass("flag-logo").appendTo(".test");
+        $("<th>").text(item.name.toUpperCase()).appendTo(".test");
+        $("<img>").attr("src", flagurl + item.alpha2Code.toLowerCase() + ".gif").appendTo(".flag-logo");
+        
+        $("<tr>").addClass("background-info").appendTo(countriesTableList);
+        $("<td>").attr("colspan", 2).text("Background Information: ").appendTo(".background-info");
+
+        $("<tr>").addClass("capital").appendTo(countriesTableList);
+        $("<td>").text("Capital: ").appendTo(".capital");
+        $("<td>").text(item.capital).appendTo(".capital");
+
+        $("<tr>").addClass("area").appendTo(countriesTableList);
+        $("<td>").text("Land area: ").appendTo(".area");
+        $("<td>").text(item.area).appendTo(".area");
+
+        $("<tr>").addClass("population").appendTo(countriesTableList);
+        $("<td>").text("Population: ").appendTo(".population");
+        $("<td>").text(item.population).appendTo(".population");
+
+        $("<tr>").addClass("language").appendTo(countriesTableList);
+        $("<td>").text("Language(s): ").appendTo(".language");
+        $("<td>").text(item.languages).appendTo(".language");
+
+        $("<tr>").addClass("currency").appendTo(countriesTableList);
+        $("<td>").text("Currency: ").appendTo(".currency");
+        $("<td>").text(item.currencies).appendTo(".currency");
     });
   }
