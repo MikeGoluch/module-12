@@ -1,14 +1,14 @@
 //class Card
-function Card(description) {
+function Card(id, name) {
     var self = this;
 
-    this.id = randomString();
-    this.description = description;
+    this.id = id;
+    this.name = name;
     this.$element = createCard();
     //method that create basic structure for a card
     function createCard() {
         var $card = $("<li>").addClass("card");
-        var $cardDescription = $("<p>").addClass("card-description").text(self.description);
+        var $cardDescription = $("<p>").addClass("card-description").text(self.name);
         var $cardDelete = $("<button>").addClass("card-btn-delete");
         var $cardDeleteSymbol = $("<span  class='far fa-times-circle' aria-hidden='true' aria-hidden='true'></span>");
         //event listeners
@@ -24,6 +24,14 @@ function Card(description) {
 //class prototype
 Card.prototype = {
     removeCard: function() {
+        var self = this;
+        $.ajax({
+            url: baseUrl + "/card/" + self.id,
+            method: "DELETE",
+            success: function() {
+                self.$element.remove();
+            }
+        });
         this.$element.remove();
     }
 }
