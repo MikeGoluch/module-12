@@ -1,7 +1,7 @@
 var baseUrl = "https://kodilla.com/pl/bootcamp-api";
 var myHeaders = {
-    "X-Client-Id" : "X-Client-Id",
-    "X-Auth-Token" : "X-Auth-Token"
+    "X-Client-Id" : "3185",
+    "X-Auth-Token" : "3677e108ad39b1b2cd88bf4302f177d2"
 }
 
 $.ajax({
@@ -41,20 +41,20 @@ function setupCards(col, cards) {
 //     return string;
 // }
 
-// CREATING COLUMNS
-var todoColumn = new Column("To do");
-var doingColumn = new Column("Doing");
-var doneColumn = new Column("Done");
+// // CREATING COLUMNS
+// var todoColumn = new Column("To do");
+// var doingColumn = new Column("Doing");
+// var doneColumn = new Column("Done");
 
-// ADDING COLUMNS TO THE BOARD
-board.addColumn(todoColumn);
-board.addColumn(doingColumn);
-board.addColumn(doneColumn);
+// // ADDING COLUMNS TO THE BOARD
+// board.addColumn(todoColumn);
+// board.addColumn(doingColumn);
+// board.addColumn(doneColumn);
 
-// CREATING CARDS
-var card1 = new Card("New task");
-var card2 = new Card("Create kanban boards");
+// // CREATING CARDS
+// var card1 = new Card("New task");
+// var card2 = new Card("Create kanban boards");
 
-// ADDING CARDS TO COLUMNS
-todoColumn.addCard(card1);
-doingColumn.addCard(card2);
+// // ADDING CARDS TO COLUMNS
+// todoColumn.addCard(card1);
+// doingColumn.addCard(card2);
