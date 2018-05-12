@@ -23,7 +23,17 @@ var board = {
                 condition = true;
             }
         }
-        
+        $.ajax({
+            url: baseUrl + "/column",
+            method: "POST",
+            data: {
+                name: columnName
+            },
+            success: function(response) {
+                var column = new Column(response.id, columnName);
+    			board.createColumn(column);
+            }
+        });
         
     });
     //function responsible for drag n drop
