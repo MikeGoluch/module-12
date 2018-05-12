@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900');
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+.flag-logo img {
+    width: 75%;
+    float: left;
+    max-width: 200px;
+}
+
+table {
+    border: none;
+    border-collapse: collapse;
+    th {
+        font-size: 30px;
+        padding: 5px 10px;
+    }
+    td {
+    border: 1px solid black;
+    }
+    .background-info {
+        background-color: crimson;
+        color: white;
+        font-size: 20px;
+    }
+    .capital,
+    .area,
+    .population,
+    .language,
+    .currency {
+        background-color: silver;
+    }
+}
