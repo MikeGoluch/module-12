@@ -26,8 +26,6 @@ var board = {
                         board.createColumn(column);
                     }
                 });
-                // var column = new Column(name);
-                // board.createColumn(column);
                 condition = false;
             } else {
                 alert("You have to enter a column name!");

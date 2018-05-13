@@ -45,11 +45,8 @@ function Column(id, name) {
                     condition = true;
                 }
             }
-            
         });
-
         $column.append($columnTitle).append($columnDelete).append($columnAddCard).append($columnCardList);
-
         return $column;
     }
 }
