@@ -24,28 +24,28 @@ function Column(id, name) {
             event.preventDefault();
             while (condition) {
                 var cardName = prompt("Enter the name of the card");
-                if (cardName.length > 0) {
-                    var card = new Card(cardName);
-                    self.addCard(card);
+                if (cardName != null && cardName.length > 0) {
+                    $.ajax({
+                        url: baseUrl + "/card",
+                        method: "POST",
+                        data: {
+                            name: cardName,
+                            bootcamp_kanban_column_id: self.id
+                        },
+                        success: function(response) {
+                            var card = new Card(response.id, cardName);
+                            self.createCard(card);
+                        }
+                    });
+                    // var card = new Card(cardName);
+                    // self.addCard(card);
                     condition = false;
                 } else {
                     alert("You have to enter a card name!");
                     condition = true;
                 }
             }
-            $.ajax({
-                url: baseUrl + "/card",
-                method: "POST",
-                data: {
-                    name: cardName,
-                    bootcamp_kanban_column_id: self.id
-                },
-                success: function(response) {
-                    var card = new Card(response.id, cardName);
-                    self.createCard(card);
-                }
-                
-            });
+            
         });
 
         $column.append($columnTitle).append($columnDelete).append($columnAddCard).append($columnCardList);
@@ -55,7 +55,7 @@ function Column(id, name) {
 }
 //class prototype
 Column.prototype = {
-    addCard: function(card) {
+    createCard: function(card) {
         this.$element.children("ul").append(card.$element);
     },
     removeColumn: function() {
