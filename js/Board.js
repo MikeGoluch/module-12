@@ -1,7 +1,7 @@
 //board object
 var board = {
     name: "Kanban Board",
-    addColumn: function(column) {
+    createColumn: function(column) {
         this.$element.append(column.$element);
         initSortable();
     },
@@ -13,28 +13,27 @@ var board = {
     $(".create-column").click(function(){
         var condition = true;
         while (condition) {
-            var name = prompt("Enter a column name");
-            if (name.length > 0) {
-                var column = new Column(name);
-                board.addColumn(column);
+            var columnName = prompt("Enter a column name");
+            if (columnName != null && columnName.length > 0) {
+                $.ajax({
+                    url: baseUrl + "/column",
+                    method: "POST",
+                    data: {
+                        name: columnName
+                    },
+                    success: function(response) {
+                        var column = new Column(response.id, columnName);
+                        board.createColumn(column);
+                    }
+                });
+                // var column = new Column(name);
+                // board.createColumn(column);
                 condition = false;
             } else {
                 alert("You have to enter a column name!");
                 condition = true;
             }
         }
-        $.ajax({
-            url: baseUrl + "/column",
-            method: "POST",
-            data: {
-                name: columnName
-            },
-            success: function(response) {
-                var column = new Column(response.id, columnName);
-    			board.createColumn(column);
-            }
-        });
-        
     });
     //function responsible for drag n drop
     function initSortable() {
